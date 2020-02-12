@@ -1,17 +1,27 @@
-#!/usr/bin/env bash
+Scrivania Digitale OIV
+======================
 
+Prerequisiti:
+Java 8
+Maven 3.2
 
-mvn clean compile package -DskipTests
+Build and run
+
+```shell script
+./run.sh
+```
+
+oppure 
+
+```shell script
+mvn clean compile package -DskipTests 
 java -jar target/sprint-flows-0.2.1-SNAPSHOT.war --spring.profiles.active=dev,oiv,swagger
+```
 
-# se e' disponibile un database postgres usare invece:
+L'applicazione partira' in modalita' dev con un database locale integrato
 
-#java -jar target/sprint-flows-0.2.1-SNAPSHOT.war  \
-#  --spring.profiles.active=demo,oiv,swagger \
-#	-Dspring.datasource.url=jdbc:postgresql://localhost:5432/flows \ # es. jdbc:postgresql://localhost:5432/flows
-#	-Dspring.datasource.username=activiti \
-#	-Dspring.datasource.password=activitipw \
-#	-Doiv.baseurl=http://elenco-oiv-test.si.cnr.it \
-#	-Doiv.psw= \
-#	-Doiv.mail.mail.user= \
-#	-Doiv.mail.mail.password=
+---
+
+Per configurare l'applicazione per il dialogo con altri sistemi (database, email, Elenco, ...) usare i file di properties, o inserire i paramentri direttamente nella 
+riga di commando (veder il file run.sh)
+
