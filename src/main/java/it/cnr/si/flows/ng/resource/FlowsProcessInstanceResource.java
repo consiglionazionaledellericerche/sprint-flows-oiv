@@ -59,8 +59,6 @@ public class FlowsProcessInstanceResource {
     @Inject
     private HistoryService historyService;
     @Inject
-    private ProcessInstanceResource processInstanceResource;
-    @Inject
     private RuntimeService runtimeService;
     @Inject
     private FlowsProcessInstanceService flowsProcessInstanceService;
@@ -191,21 +189,18 @@ public class FlowsProcessInstanceResource {
             HttpServletResponse response,
             @RequestParam(value = "processInstanceId", required = true) String processInstanceId,
             @RequestParam(value = "deleteReason", required = true) String deleteReason) {
-        processInstanceResource.deleteProcessInstance(processInstanceId, deleteReason, response);
+        runtimeService.deleteProcessInstance(processInstanceId, deleteReason);
         return response;
     }
-
 
     // TODO ???
     @RequestMapping(value = "suspendProcessInstance", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Secured({AuthoritiesConstants.ADMIN})
     @Timed
-    public ProcessInstanceResponse suspend(
-            HttpServletRequest request,
+    public boolean suspend(
             @RequestParam(value = "processInstanceId", required = true) String processInstanceId) {
-        ProcessInstanceActionRequest action = new ProcessInstanceActionRequest();
-        action.setAction(ProcessInstanceActionRequest.ACTION_SUSPEND);
-        return processInstanceResource.performProcessInstanceAction(processInstanceId, action, request);
+        runtimeService.suspendProcessInstanceById(processInstanceId);
+        return true;
     }
 
     /*

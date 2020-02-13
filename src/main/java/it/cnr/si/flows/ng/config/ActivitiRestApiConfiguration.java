@@ -21,15 +21,15 @@ public class ActivitiRestApiConfiguration {
         return resolver;
     }
 
-    @Configuration
-    @ComponentScan(basePackages = {"org.activiti.rest.exception", "org.activiti.rest.service.api"},
-            nameGenerator = ActivitiBeanNameGenerator.class
-            )
-    public static class ComponentScanRestResourcesConfiguration {
-
-        // The component scan cannot be on the root configuration, it would trigger
-        // always even if the condition is evaluating to false.
-        // Hence, this 'dummy' configuration
-
-    }
+//    @Configuration
+//    @ComponentScan(basePackages = {"org.activiti.rest.exception", "org.activiti.rest.service.api"},
+//            nameGenerator = ActivitiBeanNameGenerator.class
+//            )
+//    public static class ComponentScanRestResourcesConfiguration {
+//
+//        // The component scan cannot be on the root configuration, it would trigger
+//        // always even if the condition is evaluating to false.
+//        // Hence, this 'dummy' configuration
+//
+//    }
 }
