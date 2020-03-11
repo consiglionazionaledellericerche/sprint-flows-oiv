@@ -89,7 +89,7 @@ public class FlowsProcessInstanceResourceTest {
         String processInstanceID = verifyMyProcesses(1, 0);
         // testo che, anche se una Process Instance viene sospesa, la vedo ugualmente
         util.loginAdmin();
-        flowsProcessInstanceResource.suspend(new MockHttpServletRequest(), processInstanceID);
+        flowsProcessInstanceResource.suspend(processInstanceID);
 
         util.loginResponsabileAcquisti();
         processInstanceID = verifyMyProcesses(1, 0);
@@ -211,8 +211,8 @@ public class FlowsProcessInstanceResourceTest {
         assertEquals(false, processInstance.isSuspended());
         //solo admin può sospendere il flow
         util.loginAdmin();
-        ProcessInstanceResponse response = flowsProcessInstanceResource.suspend(new MockHttpServletRequest(), processInstance.getId());
-        assertEquals(true, response.isSuspended());
+        final boolean suspend = flowsProcessInstanceResource.suspend(processInstance.getId());
+        assertEquals(true, suspend);
     }
 
 
